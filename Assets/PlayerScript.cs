@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -257,6 +258,11 @@ public class PlayerScript : MonoBehaviour
         if (WinTimer >= 300)
         {
             YouWin = true;
+        }
+
+        if(YouWin == true)
+        {
+            SceneManager.LoadScene(1);
         }
         //losing conditions down here 
 
