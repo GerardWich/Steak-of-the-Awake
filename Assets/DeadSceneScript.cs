@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine.UI;
 
-
-public class SceneManagerScript : MonoBehaviour
+public class DeadSceneScript : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -20,7 +19,7 @@ public class SceneManagerScript : MonoBehaviour
         
     }
 
-    public void Continue ()
+    public void continuez()
     {
 
     }

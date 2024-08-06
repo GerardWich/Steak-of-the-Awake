@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -59,14 +60,22 @@ public class PlayerScript : MonoBehaviour
     public bool YouDied;
     public bool YouWin;
     public float WinTimer;
-
+    public bool UsedWater;
     public float Money;
 
-    public bool UsedWater;
+    public AudioSource Ambience;
+    public AudioSource Meow;
+    public AudioSource Door;
+    public AudioSource Fridgey;
+    public AudioSource Splash;
+    public AudioSource ChaChing;
+    public AudioSource Hissing;
+    public AudioSource Burning;
 
     // Start is called before the first frame update
     void Start()
     {
+        Ambience.Play();
         Hunger = 100;
         IsEating = false;
 
@@ -211,6 +220,7 @@ public class PlayerScript : MonoBehaviour
                 CatNumber = Random.Range(1, 4);
                 HasMoved = true;
             }
+            Hissing.Play();
         }
         if (CatTemper <= 0)
         {
@@ -253,6 +263,7 @@ public class PlayerScript : MonoBehaviour
             CatButton.SetActive(true);
         }
         
+        
 
 
         if (WinTimer >= 300)
@@ -263,6 +274,11 @@ public class PlayerScript : MonoBehaviour
         if(YouWin == true)
         {
             SceneManager.LoadScene(1);
+        }
+
+        if(YouDied == true)
+        {
+            SceneManager.LoadScene(2);
         }
         //losing conditions down here 
 
@@ -279,7 +295,7 @@ public class PlayerScript : MonoBehaviour
             BombButton.SetActive(false);
             FridgeButton.SetActive(false);
             Debug.Log("FRidgebomb should be here now");
-
+            Fridgey.Play();
         }
         public void BombFridge()
         {
@@ -288,6 +304,7 @@ public class PlayerScript : MonoBehaviour
             BombButton.SetActive(true);
             FridgeButton.SetActive(true);
             BombFridgeButton.SetActive(false);
+            Fridgey.Play();
         }
 
         public void FirePlace()
@@ -295,6 +312,7 @@ public class PlayerScript : MonoBehaviour
             if (Water >= 1)
             {
                 UsedWater = true;
+                Splash.Play();
             }
         }
 
@@ -305,6 +323,7 @@ public class PlayerScript : MonoBehaviour
             LightswitchOFFButton.SetActive(true);
             BedroomBGLight.SetActive(false);
             BedroomBGDark.SetActive(true);
+            Fridgey.Play();
         }
 
         public void SwitchDown()
@@ -316,6 +335,7 @@ public class PlayerScript : MonoBehaviour
                 LightswitchOFFButton.SetActive(false);
                 BedroomBGLight.SetActive(true);
                 BedroomBGDark.SetActive(false);
+            Fridgey.Play();
             }
             
         }
@@ -356,6 +376,7 @@ public class PlayerScript : MonoBehaviour
             EnergyButton.SetActive(false);
             fivetext.SetActive(false);
             eighttext.SetActive(false);
+            Door.Play();
         }
 
         public void LivingRoom()
@@ -380,10 +401,11 @@ public class PlayerScript : MonoBehaviour
             fivetext.SetActive(false);
             eighttext.SetActive(false);
 
-        InLivingRoom = true;
+            InLivingRoom = true;
             InbedRoom = false;
             InKitchen = false;
             InShop = false;
+            Door.Play();
         }
 
         public void Kitchen()
@@ -419,7 +441,7 @@ public class PlayerScript : MonoBehaviour
             EnergyButton.SetActive(false);
             fivetext.SetActive(false);
             eighttext.SetActive(false);
-
+            Door.Play();
         }
 
     public void Cat ()
@@ -428,6 +450,7 @@ public class PlayerScript : MonoBehaviour
         IsCatAngry = false;
         HasMoved = false;
         Money += 1;
+        Meow.Play();
     }
 
     public void Shop ()
@@ -453,6 +476,8 @@ public class PlayerScript : MonoBehaviour
         LightswitchOFFButton.SetActive(false);
         BedroomBGLight.SetActive(false);
         BedroomBGDark.SetActive(false);
+
+        Door.Play();
     }
 
     public void WateraButton ()
@@ -461,8 +486,8 @@ public class PlayerScript : MonoBehaviour
         {
             Money -= 5;
             Water += 1;
+            ChaChing.Play();
         }
-
     }
 
     public void EnergyaButton ()
@@ -471,6 +496,7 @@ public class PlayerScript : MonoBehaviour
         {
             Money -= 8;
             Energy += 1;
+            ChaChing.Play();
         }
     }
 
